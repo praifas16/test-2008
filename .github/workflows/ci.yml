@@ -46,8 +46,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          npm install -g gh-pages
-          npm run build
-          npx gh-pages -d build
+          npm install -g vercel
+          vercel --prod --token=$VERCEL_TOKEN --confirm
